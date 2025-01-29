@@ -1,0 +1,48 @@
+body {
+  font-family: 'Roboto, sans-serif';
+  background-color: #F5F7F9;
+  font-weight: 300;
+}
+
+/* Add this to your Tailwind CSS file or styles */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+input[type="file"] {
+  border: 1px solid gray; /* Ensure you use 'solid' for a visible border */
+  box-sizing: border-box; /* Include padding and border in the element's size */
+  padding: 10px 5px; /* Add space inside the input */
+  margin-top: 10px; /* Add space around the input */
+  border-radius: 0.2rem; /* Round the corners */
+  background-color: #f9f9f9; /* Add a background color for visibility */
+  color: black; /* Change text color */
+  cursor: pointer; /* Pointer cursor for better UX */
+}
+
+input[type="file"]::file-selector-button {
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: darkgreen;
+}
