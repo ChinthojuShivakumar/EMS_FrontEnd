@@ -6,7 +6,7 @@ import { errorMessage, successMessage } from "./Alert";
 // export const BASE_URL = "http://localhost:8082/v2";
 export const HOST_URL = "http://localhost:8081/v2"
 
-export const BASE_URL = "https://ems-backend-z2n9.onrender.com"
+export const BASE_URL = "https://ems-backend-z2n9.onrender.com/v2"
 
 
 const statusCodes = [
