@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .fixed-width {
-    width: 150px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: clip;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 }
 

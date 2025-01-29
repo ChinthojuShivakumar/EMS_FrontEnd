@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { fetchApiV1, putApiV1 } from "../Constant/Network";
 import { useNavigate } from "react-router-dom";
 import { getUserRole } from "../../Utils/Functions";
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const user_id = JSON.parse(localStorage.getItem("user"))?._id;
@@ -22,7 +23,7 @@ const Header = () => {
     top: "80px",
     right: "2%",
   };
-  const userRole = getUserRole()
+  const userRole = getUserRole();
   const fetchNotifications = useCallback(async () => {
     try {
       const response = await fetchApiV1(`/user/notification/${user_id}`);
@@ -82,7 +83,8 @@ const Header = () => {
           <i>EMS</i>
         </h1>
         <p>
-          {userName}{userRole !== "USER" && ` - ${role}`}
+          {userName}
+          {userRole !== "USER" && ` - ${role}`}
         </p>
       </div>
       <div className="w-auto flex gap-5">
@@ -94,7 +96,7 @@ const Header = () => {
             {notificationList.filter((not) => not.read === false).length}
           </p>
         </div>
-        <p className="hidden">
+        <p className="cursor-pointer" onClick={() => navigate("/profile")}>
           <AccountCircleIcon />
         </p>
       </div>

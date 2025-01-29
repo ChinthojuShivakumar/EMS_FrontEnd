@@ -14,6 +14,7 @@ import SingleProject from "../../Pages/Admin/Project/SingleProject"
 import UserModal from "../../Pages/Admin/AdminUsers/UserModal"
 import Teams from "../../Pages/Admin/Teams/Teams"
 import TeamAction from "../../Pages/Admin/Teams/Action"
+import Profile from "../../Pages/Admin/User/Profile"
 
 
 const AdminRoutes = () => {
@@ -74,6 +75,10 @@ const AdminRoutes = () => {
       <Route
         path="/team/:action"
         element={<TeamAction />}
+      />
+      <Route
+        path="/profile"
+        element={<Profile />}
       />
     </Routes>
   )
