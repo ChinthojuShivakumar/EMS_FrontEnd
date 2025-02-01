@@ -10,7 +10,7 @@ import { USER } from "../../../Components/Constant/EndPoints";
 
 const TeamAction = () => {
   const location = useLocation();
-  const path = location.pathname.split("/")[3];
+  const path = location.pathname.split("/")[2];
   const navigate = useNavigate();
   const adminId = getUserId();
   const userRole = getUserRole();
@@ -194,7 +194,7 @@ const TeamAction = () => {
                 name="name"
                 value={inputs.teamName}
                 fullWidth
-                sx={{ width: 600 }}
+                sx={{ width: "100%" }}
                 onChange={(e) => handleChange(e, null, "teamName")}
               />
               <Autocomplete
@@ -202,7 +202,7 @@ const TeamAction = () => {
                 options={managerList || []}
                 getOptionLabel={(option) => option?.fullName || ""}
                 fullWidth
-                sx={{ width: 600 }}
+                sx={{ width: "100%" }}
                 isOptionEqualToValue={(option, value) =>
                   option._id === value._id
                 }
@@ -220,7 +220,7 @@ const TeamAction = () => {
                 options={filteredUser || []}
                 getOptionLabel={(option) => option?.fullName || ""}
                 fullWidth
-                sx={{ width: 600 }}
+                sx={{ width: "100%" }}
                 isOptionEqualToValue={(option, value) =>
                   option._id === value._id
                 }
@@ -239,7 +239,7 @@ const TeamAction = () => {
                 options={filteredUser || []}
                 getOptionLabel={(option) => option?.fullName || ""}
                 fullWidth
-                sx={{ width: 600 }}
+                sx={{ width: "100%" }}
                 isOptionEqualToValue={(option, value) =>
                   option._id === value._id
                 }
@@ -260,7 +260,7 @@ const TeamAction = () => {
                 getOptionLabel={(option) => option?.title || ""}
                 fullWidth
                 multiple
-                sx={{ width: 600 }}
+                sx={{ width: "100%" }}
                 isOptionEqualToValue={(option, value) =>
                   option._id === value._id
                 }
