@@ -93,6 +93,7 @@ const LoginPage = () => {
 
         navigate("/");
         window.location.reload();
+        return
       } else {
         setOtpState(false);
         throw new Error(response);
