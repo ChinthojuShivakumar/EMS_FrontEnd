@@ -143,7 +143,7 @@ const TeamAction = () => {
       const response = await postApiV2(`/team?adminId=${adminId}`, inputs);
       if (response.status === 201) {
         clearInputs();
-        navigate("/admin/teams");
+        navigate("/teams");
         return;
       }
     } catch (error) {
@@ -158,7 +158,7 @@ const TeamAction = () => {
       );
       if (response.status === 202) {
         clearInputs();
-        navigate("/admin/teams");
+        navigate("/teams");
         return;
       }
     } catch (error) {

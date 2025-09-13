@@ -116,8 +116,9 @@ const SideMenu = () => {
   // const isMenu = adminMenus.some((menu) => menusList.some((item) => item.title === menu.menu))
 
   const handleLogout = async () => {
+    const loginTime = JSON.parse(localStorage.getItem("loginTime"))
     try {
-      const response = await postApiV1(LOGOUT);
+      const response = await postApiV1(LOGOUT, { _id: loginTime._id });
       if (response.status === 200) {
         localStorage.clear();
         navigate("/login");

@@ -201,7 +201,7 @@ const Project = () => {
   const handleView = (row) => {
     const params = new URLSearchParams();
     params.append("projectName", row?.title);
-    navigate(`/admin/project?${params}`);
+    navigate(`/project?${params}`);
   };
   const postProject = async () => {
     try {

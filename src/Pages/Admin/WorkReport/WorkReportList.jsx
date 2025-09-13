@@ -41,8 +41,7 @@ const WorkReportList = () => {
   const initialState = {
     report: "",
     userId: JSON.parse(localStorage.getItem("user"))._id,
-    loginTime: JSON.parse(localStorage.getItem("loginTime")),
-    logoutTime: null,
+    loginTime: localStorage.getItem("loginTime")?.loginTime,
   };
   const [inputs, setInputs] = useState(initialState);
   const [editMode, setEditMode] = useState(false);
@@ -107,11 +106,10 @@ const WorkReportList = () => {
     }
   }, [user._id, userRole]);
   const postWorkReport = async () => {
-    const logoutTime = new Date().toISOString();
+   
     try {
       const response = await postApiV1(REPORT, {
         ...inputs,
-        logoutTime: logoutTime,
       });
       if (response.status == 201) {
         clearInputs();
@@ -122,13 +120,12 @@ const WorkReportList = () => {
     }
   };
   const updateWorkReport = async () => {
-    const logoutTime = new Date().toISOString();
+   
     try {
       const response = await patchApiV1(
         `${REPORT.replace("create", `${inputs._id}`)}`,
         {
           ...inputs,
-          logoutTime: logoutTime,
         }
       );
       if (response.status == 201) {
@@ -186,12 +183,14 @@ const WorkReportList = () => {
               <table className="w-full">
                 <thead className="bg-green-300">
                   <tr className="">
-                    <th className="py-2 border-r-2">Employee Name</th>
                     <th className="py-2 border-r-2">Employee Id</th>
-                    <th className="py-2 border-r-2">Login Time</th>
+                    <th className="py-2 border-r-2">Employee Name</th>
                     <th className="py-2 border-r-2">Report</th>
-                    <th className="py-2 border-r-2">Log Out</th>
                     <th className="py-2 border-r-2">Date</th>
+                    <th className="py-2 border-r-2">Login Time</th>
+                    <th className="py-2 border-r-2">Log Out</th>
+                    <th className="py-2 border-r-2">Total Working Hours</th>
+
                     <th className="py-2 border-r-2">Action</th>
                   </tr>
                 </thead>
@@ -210,13 +209,10 @@ const WorkReportList = () => {
                         key={workReport?._id}
                       >
                         <td className="py-2 border-r-2">
-                          {workReport?.userId?.fullName}
-                        </td>
-                        <td className="py-2 border-r-2">
                           {workReport?.userId?.employeeId}
                         </td>
                         <td className="py-2 border-r-2">
-                          {getCurrentTime(workReport?.loginTime)}
+                          {workReport?.userId?.fullName}
                         </td>
                         <td className="py-2 border-r-2">
                           <div
@@ -226,11 +222,17 @@ const WorkReportList = () => {
                           />
                         </td>
                         <td className="py-2 border-r-2">
-                          {getCurrentTime(workReport?.logoutTime)}
-                        </td>
-                        <td className="py-2 border-r-2">
                           {workReport?.updatedAt?.split("T")[0]}
                         </td>
+                        <td className="py-2 border-r-2">
+                          {getCurrentTime(workReport?.loginTime)}
+                        </td>
+
+                        <td className="py-2 border-r-2">
+                          {workReport?.logoutTime !== null &&
+                            getCurrentTime(workReport?.logoutTime)}
+                        </td>
+                        <td className="py-2 border-r-2">{workReport?.workingHours}</td>
                         <td className="py-2 border-r-2">
                           <div className="w-full flex justify-center items-center gap-5">
                             {isEdit &&

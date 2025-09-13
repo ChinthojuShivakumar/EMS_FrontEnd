@@ -12,6 +12,10 @@ const Header = () => {
   const [notificationList, setNotificationList] = useState([]);
   const role = JSON.parse(localStorage.getItem("role"));
   const userName = JSON.parse(localStorage.getItem("user")).fullName;
+  const login_time = JSON.parse(localStorage.getItem("loginTime"));
+
+  
+  const [elapsedTime, setElapsedTime] = useState(0);
   const navigate = useNavigate();
   const style = {
     width: "500px",
@@ -23,6 +27,32 @@ const Header = () => {
     top: "80px",
     right: "2%",
   };
+  useEffect(() => {
+    const login = new Date(login_time.loginTime);
+    const interval = setInterval(() => {
+      const now = new Date();
+      const diff = now - login;
+      setElapsedTime(diff);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [login_time]);
+
+  const formatTime = (ms) => {
+    const totalSeconds = Math.floor(ms / 1000);
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
+      2,
+      "0"
+    );
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
+  // Work time limit (e.g., 8 hours)
+  const workLimit = 9 * 60 * 60 * 1000; // 8 hrs in ms
+  const remaining = workLimit - elapsedTime;
+
   const userRole = getUserRole();
   const fetchNotifications = useCallback(async () => {
     try {
@@ -87,6 +117,11 @@ const Header = () => {
           {userRole !== "USER" && ` - ${role}`}
         </p>
       </div>
+      {remaining > 0 ? (
+        <p className="text-lg text-green-600 bg-white w-52 text-center">Elapsed: {formatTime(elapsedTime)}</p>
+      ) : (
+        <p className="text-lg text-red-600 bg-white w-52 text-center">Work time completed !</p>
+      )}
       <div className="w-auto flex gap-5">
         <div className="relative">
           <p className="cursor-pointer" onClick={() => setIsOpen(true)}>

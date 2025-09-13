@@ -31,6 +31,7 @@ const LoginPage = () => {
   const initialState = {
     email: "",
     otp: "",
+    loginTime: "",
   };
   const [inputs, setInputs] = useState(initialState);
   const [otpState, setOtpState] = useState(false);
@@ -64,7 +65,12 @@ const LoginPage = () => {
   };
   const verifyOTP = async () => {
     try {
-      const response = await postApiV1(VERIFY_OTP, inputs);
+      const currentTime = new Date().toISOString();
+      setInputs({ ...inputs, loginTime: currentTime });
+      const response = await postApiV1(VERIFY_OTP, {
+        ...inputs,
+        loginTime: currentTime,
+      });
       if (response.status === 200) {
         setOtpState(true);
         localStorage.setItem("token", JSON.stringify(response.data.token));
@@ -80,8 +86,9 @@ const LoginPage = () => {
         //     window.location.reload()
         //     return
         // }
-        const currentTime = new Date().toISOString();
-        localStorage.setItem("loginTime", JSON.stringify(currentTime));
+        // const currentTime = new Date().toISOString();
+
+        localStorage.setItem("loginTime", JSON.stringify(response.data.loginData));
         // const permissions = {}
 
         navigate("/");
@@ -116,6 +123,7 @@ const LoginPage = () => {
               onChange={(e) => handleChangeInputs(e, "otp")}
               variant="standard"
               fullWidth
+              type="password"
               sx={MUI_INPUT_STYLE}
             />
           )}

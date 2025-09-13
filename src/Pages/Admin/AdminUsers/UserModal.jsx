@@ -21,6 +21,7 @@ const UserModal = () => {
     name: "",
     menus: [],
     subMenus: [],
+    status: false,
   };
   const [inputs, setInputs] = useState(initialState);
   const [editMode, setEditMode] = useState(false);
@@ -118,7 +119,7 @@ const UserModal = () => {
         inputs
       );
       if (response.status === 201) {
-        navigate("/admin/roles");
+        navigate("/roles");
         return;
       }
     } catch (error) {
@@ -132,7 +133,7 @@ const UserModal = () => {
         inputs
       );
       if (response.status === 202) {
-        navigate("/admin/roles");
+        navigate("/roles");
         return;
       }
     } catch (error) {
@@ -214,6 +215,14 @@ const UserModal = () => {
                 )}
                 onChange={(e, nV) => handleChange(e, nV, "submenu")}
               />
+              {/* <div>
+                <label htmlFor="">Active</label>
+                <input type="radio" name="" id="" value={"Active"}/>
+              </div>
+              <div>
+                <label htmlFor="">Inactive</label>
+                <input type="radio" name="" id="" value={"Inactive"}/>
+              </div> */}
             </div>
             <button
               className="w-52 text-white bg-green-700 py-3 capitalize mt-10"
